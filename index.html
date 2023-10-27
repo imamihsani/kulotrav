@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="aset/gambar/icon.png">
+    <link rel="preload" as="image" href="aset/gambar/1.png">
+    <link rel="preload" as="image" href="aset/gambar/2.png">
+    <link rel="preload" as="image" href="aset/gambar/4.jpg">
+    <link rel="preload" as="image" href="aset/gambar/5.png">
+    <link rel="stylesheet" href="aset/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Montserrat:wght@500&display=swap');
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes fadeOut {
+          from {
+            opacity: 1;
+          }
+          to {
+            opacity: 0;
+          }
+        }
+
+        body{
+            font-family: 'Comfortaa', cursive;
+            font-family: 'Montserrat', sans-serif;
+            background-color: rgba(61, 237, 151, 0.5);
+        }
+
+        img,video{
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .carousel-item{
+            max-width: 100%;
+            max-height: 20%;
+        }
+
+        nav{
+            background-color: #234F1E;
+        }
+
+        .carousel-caption  {
+          text-align: left; 
+          left: 15%; 
+          right: 15%; 
+          top: 50%; 
+          transform: translateY(-50%); 
+        }
+
+        span {
+          opacity: 0;
+          transition: all 0.4s ease;
+        }
+
+        span.fade {
+          opacity: 1;
+        }
+
+        .modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.7);
+          animation: fadeIn 0.3s ease-in-out; 
+        }
+
+        .modal-content {
+          background-color: #234F1E;
+          margin: 10% auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 60%;
+          text-align: center;
+          border-radius: 5px;
+          position: relative;
+          animation: fadeIn 0.3s ease-in-out; 
+
+        }
+
+        .modal-content .gambarmodal{
+          border:1px solid #9df5ca;
+        }
+
+        .close {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+
+        .video-background {
+          position: relative;
+          width: 100%;
+          height: 80vh; 
+          overflow: hidden;
+          background: rgba(0, 0, 0, 0.5);
+        }
+
+        video {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;  
+        }
+
+        .titleWU{
+          position: relative;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+
+        .kartu {
+          position: absolute;
+          top: 30%;
+          left: 30%;
+          transform: translate(-20%, -30%);
+          background: #fff;
+          padding: 10px;
+          border-radius: 10px;
+        }
+
+        .image-container {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .image-container img {
+          transition: transform 0.3s;
+        }
+
+        .image-container .overlayg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        .image-container:hover img {
+          transform: scale(1.1);
+        }
+
+        .image-container:hover .overlayg {
+          opacity: 1;
+        }
+
+        span{
+          opacity: 1;
+        }
+
+        .rating {
+          color:#fff;
+          font-size: 18px;
+        }
+
+        .harga {
+          color:#fff;
+          font-size: 18px;
+        }
+
+        .promo{
+          background-image: linear-gradient( rgba(0,0,0,0.6), #234F1E), url(aset/gambar/15.jpg);
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center center;
+          height: 40vh;
+        }
+
+        .overlayp {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: rgba(0, 0, 0, 0.5);
+          padding: 10px;
+          color: white;
+        }
+
+        .card-img-top {
+          max-width: 400px;
+          max-height: 150px;
+          border-radius: 0%;
+          background: rgba(0, 0, 0, 0.5);
+          opacity: 0.9;
+          transition: opacity 0.3s ease-in-out;
+        }
+
+        .card-img-top:hover {
+          opacity: 1;
+        }
+
+        .promoimg:hover{
+          transform: scale(1.2);
+        }
+
+        .tagline0, .tagline1, .tagline2 {
+          opacity: 0; 
+          transition: opacity 0.5s ease-in-out; 
+          font-size:50px;
+        }
+
+        .subtagline0,.subtagline1,.subtagline2 {
+          opacity: 0; 
+          transition: opacity 0.9s ease-in-out; 
+          font-size:30px;
+        }
+
+        .carousel-item.active .tagline0,.carousel-item.active .subtagline0 {
+          opacity: 1; 
+        }
+
+        .carousel-item.active .tagline1,.carousel-item.active .tagline2,.carousel-item.active .subtagline1,.carousel-item.active .subtagline2 {
+          opacity: 1; 
+        }
+
+        .pengertian {
+          padding: 10px;
+        }
+
+        .pembungkusjeep {
+          background-color: #9df5ca;
+        }
+
+        img.jeep {
+          max-width: 100%;
+          height: auto;
+        }
+
+        @media (min-width: 768px) {
+
+          .anda{
+            font-size: large;
+          }
+
+          .carousel-caption  {
+            text-align: left; 
+            left: 5%; 
+            right: 15%; 
+            top: 40%; 
+            transform: translateY(-50%); 
+          }
+
+          .tagline0, .tagline1, .tagline2 {
+            opacity: 0; 
+            transition: opacity 0.5s ease-in-out; 
+            font-size:40px;
+          }
+
+          .subtagline0,.subtagline1, .subtagline2 {
+            opacity: 0; 
+            transition: opacity 0.9s ease-in-out; 
+            font-size:20px;
+          }
+
+          .harga {
+             font-size: 14px;
+          }
+
+          .video-background{
+            width: 100%;
+            height: 130vh;
+          }
+
+          .dukungan{
+            height:80px;
+          }
+
+        }
+
+        @media (max-width: 576px) {
+          .overlayg {
+            padding:50%;
+            max-width: 150px;
+            max-height: 150px;
+            z-index: 2;
+          }
+
+          .rating{
+            font-size: 12px;
+          }
+
+          .image-container {
+            position: relative;
+            overflow: hidden;
+          }
+
+          .image-container .overlayg {
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s;
+          }
+
+          .gambarwisata{
+            width:150px;
+            height:150px;
+          }
+
+          .pbgb{
+            margin-top: 100px;
+          }
+
+          .image-container img {
+            transition: transform 0.3s;
+          }
+
+          .image-container .overlayg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+          }
+
+          .image-container:hover img {
+            transform: scale(1.1);
+          }
+
+          .image-container:hover .overlayg {
+            opacity: 1;
+          }
+          
+          .harga {
+            color:#fff;
+            font-size: 16px;
+          }
+
+          .promo{
+            background-image: linear-gradient( rgba(0,0,0,0.6), #234F1E), url(aset/gambar/15.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 100vh;
+          }
+
+          .textpaket{
+            font-size: 13px;
+          }
+
+          .overlayp {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            color: white;
+          }
+
+          .definisi {
+            font-size: 16px; 
+            margin-right: 10%;
+            text-align: center;
+          }
+
+          .tagline0,.tagline1,.tagline2{
+            font-size:medium;
+          }
+
+          .carousel-caption  {
+            text-align: left; 
+            left: 15%; 
+            right: 15%; 
+            top: 40%; 
+            transform: translateY(-50%); 
+          }
+
+          .subtagline0,.subtagline1,.subtagline2{
+            font-size: small;
+          }
+
+          .pbgb{
+            height:150px;
+            width:150px;
+          }
+
+          .wisataunggulan{
+            height:150px;
+            width:150px;
+          }
+
+          .video-background {
+            position: relative;
+            width: 100%;
+            height: 90vh; 
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.5);
+          }
+
+          video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;   
+          }
+
+          .modal-content {
+            background-color: #234F1E;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #9df5ca;
+            width: 80%;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+            animation: fadeIn 0.3s ease-in-out;
+          }
+
+          .modal-content .gambarmodal{
+            width:272px;
+            height:272px;
+            padding: 2%;
+          }
+        }
+
+        @media (max-width: 414px) {
+
+          .promo{
+            background-image: linear-gradient( rgba(0,0,0,0.6), #234F1E), url(aset/gambar/15.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 110vh;
+          }
+
+          .video-background {
+            position: relative;
+            width: 100%;
+            height: 100vh; 
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.5);
+          }
+
+          .modal-content{
+            height:60%;
+          }
+
+          .modal-content .gambarmodal{
+            height: 150px;
+            width: 180px;
+            padding: 5%;
+          }
+
+          .modal-content .teksmodal{
+            font-size: 10px;
+          }
+
+        }
+
+        @media (min-width: 1024px) {
+
+          .anda{
+            font-size: x-large;
+          }
+
+          .video-background {
+            position: relative;
+            width: 100%;
+            height: 80vh; 
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.5);
+          }
+
+          video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .carousel-caption  {
+            text-align: left; 
+            left: 5%; 
+            right: 15%; 
+            top: 50%; 
+            transform: translateY(-50%); 
+          }
+
+          .tagline0, .tagline1, .tagline2 {
+            opacity: 0; 
+            transition: opacity 0.5s ease-in-out; 
+            font-size:50px;
+          }
+
+          .subtagline0,.subtagline1, .subtagline2 {
+            opacity: 0; 
+            transition: opacity 0.9s ease-in-out; 
+            font-size:30px;
+          }
+
+          .pengertian{
+            margin-top: 50px;
+            margin-bottom: 10px;
+            text-align:center;
+          }
+
+          .modal-content {
+            background-color: #234F1E;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+            animation: fadeIn 0.3s ease-in-out; 
+          }
+
+          .modal-content .gambarmodal{
+            width:256px;
+            height:256px;
+          }
+
+          .modal-content .teksmodal{
+            font-size: 20px;
+          }
+
+        }
+
+        @media (min-width: 1211px) {
+          .promo{
+            background-image: linear-gradient( rgba(0,0,0,0.6), #234F1E), url(aset/gambar/15.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 50vh;
+          }
+
+          .video-background {
+            position: relative;
+            width: 100%;
+            height: 90vh; 
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.5);
+          }
+        }
+    </style>
+    <script src="aset/bootstrap/dist/js/bootstrap.min.js"></script>
+    <title>Kulotrav</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top fixed-top shadow">
+            <div class="container-fluid">
+              <a class="navbar-brand text-light" href="#"><h3><b>Kulotrav</b></h3></a>
+              <button class="navbar-toggler" style="border-color: #fff;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon text-light"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav justify-content-between text-light">
+                  <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="#" data-scroll="section_tentangkami">Tantang Kami</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-light" href="#" data-scroll="section_paketwisata">Paket & Top Wisata</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-light" href="#" data-scroll="section_kontak">Kontak Kami</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="aset/gambar/1.png" class="d-block w-100" alt="...">
+                  <div class="carousel-caption">
+                    <h1 class="tagline0 shadow"><b>Kulotrav</b> (Kulonprogo Traveler)</h1>
+                    <small class="subtagline0">Saatnya mengexplore pesona hidden gems di DIY bagian barat</small>
+                  </div>
+              </div>
+              <div class="carousel-item">
+                <img src="aset/gambar/2.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption">
+                  <h1 class="tagline1 shadow"><b>Pusing?</b> Healing aja!</h1>
+                  <small class="subtagline1">Mandi di Kedung Pedut dijamin bikin kamu fresh lagi!</small>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="aset/gambar/4.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption">
+                  <h1 class="tagline2 shadow">Yuk, liburan ke <b>Kulonprogo</b> pakai <b>Kulotrav</b></h1>
+                  <small class="subtagline2">View Puncak Kalibiru cocok untuk relaksasi liburan Anda!</small>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="container" id="section_tentangkami">
+            <div class="row mt-4">
+                <div class="col-sm-4 col-md-4 col-lg-4 mb-1">
+                    <div class="card-body">
+                        <div class="card" style="border-radius: 50,50,50,50; background-color: #234F1E">
+                            <center><h1 class="mt-1 text-light"><i class="bi bi-shop-window"></i></h1></center>
+                            <blockquote class="blockquote text-center text-light">Kuliner</blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 mb-1">
+                    <div class="card-body">
+                        <div class="card" style="border-radius: 50,50,50,50; background-color: #234F1E">
+                            <center><h1 class="mt-1 text-light"><i class="bi bi-houses-fill"></i></h1></center>
+                            <blockquote class="blockquote text-center text-light">Homestay</blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 mb-1">
+                    <div class="card-body">
+                        <div class="card" style="border-radius: 50,50,50,50; background-color: #234F1E">
+                            <center><h1 class="mt-1 text-light"><i class="bi bi-tree-fill"></i></h1></center>
+                            <blockquote class="blockquote text-center text-light">Wisata</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container"> 
+          <div class="row mt-3">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <img src="aset/gambar/5.png" class="person" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
+              <h4 class="anda mt-2 float-end"><b>Anda jenuh dan sedang membutuhkan refreshing?</b> Manjakan diri Anda dengan healing ke ratusan destinasi di Kabupaten Kulonprogo sekarang juga! Ada banyak wisata kuliner, wisata alam, maupun penginapan dengan harga terjangkau. Kami siap menjadi <i>Tour Guide</i> Anda untuk menjelajahi berbagai wisata di Kulonprogo.</h4>
+              <button class="btn btn-lg text-light mt-2 shadow" style="background-color: #234F1E; border-radius: 0px;"><i class="bi bi-ticket-detailed-fill"></i> Booking Sekarang!</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid" style="background-color: #234F1E; border: none;">
+          <div class="row">
+            <div class="pengertian col-lg-6 col-md-6 col-sm-6 col-12">
+              <h4 class="definisi mt-3 float-start text-light"><b>Kulotrav</b> adalah jasa <i>Tour Guide</i> profesional yang beroperasi di area Kabupaten Kulonprogo.<br>Segera berlibur dengan menjelajahi Pegunungan Menoreh sampai ke bibir pantai selatan DIY!</h4>
+            </div>
+            <div class="pembungkusjeep col-lg-6 col-md-6 col-sm-12 col-12" style="background-color: #9df5ca">
+              <img src="aset/gambar/jeep.png" class="jeep img-fluid mb-3" style="max-width: 100%; height: auto;">
+            </div>
+          </div>
+        </div>
+
+        <div class="promo container-fluid shadow" id="section_paketwisata">
+          <div class="row">
+            <div class="col-10 offset-1">
+              <div class="card mt-5" style="background-color: transparent; border:none;">
+                <center><h3 class="text-light"><b>Paket kami:</b></h3></center>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-4 col-lg-4 col-md-4 col-12">
+                      <center>
+                        <div class="card mb-3" style="max-width: 400px; max-height: 150px; border-radius: 0%; background-color: transparent; border-color: #9df5ca;">
+                          <img src="aset/gambar/promo1.jpg" class="promoimg card-img-top img-fluid" alt="..." style="max-width: 400px; max-height: 150px; border-radius: 0%; background-color: transparent;">
+                          <div class="overlayp">
+                            <span class="harga text-light text-center"><b>Family</b><br>Rp. 270K<br>
+                              <button class="booking btn btn-sm btn-outline-success text-light" style="border-radius: 0px; border-color: #fff;"> Booking</button>
+                            </span>
+                          </div>
+                        </div>
+                      </center>
+                    </div>
+                    <div class="col-sm-4 col-lg-4 col-md-4 col-12">
+                      <center>
+                        <div class="card mb-3" style="max-width: 400px; max-height: 150px; border-radius: 0%; background-color: transparent; border-color: #9df5ca;">
+                          <img src="aset/gambar/promo2.jpg" class="promoimg card-img-top img-fluid" alt="..." style="max-width: 400px; max-height: 150px; border-radius: 0%; background-color: transparent;">
+                          <div class="overlayp">
+                            <span class="harga text-light text-center"><b>Dating</b><br>Rp. 170K<br></span>
+                            <button class="booking btn btn-sm btn-outline-success text-light" style="border-radius: 0px; border-color: #fff;"> Booking</button>
+                          </div>
+                        </div>
+                      </center>
+                    </div>
+                    <div class="col-sm-4 col-lg-4 col-md-4 col-12">
+                      <center>
+                        <div class="card mb-3" style="max-width: 400px; max-height: 150px; border-radius: 0%; background-color: transparent; border-color: #9df5ca;">
+                          <img src="aset/gambar/promo3.jpg" class="promoimg card-img-top img-fluid" alt="..." style="max-width: 400px; max-height: 150px; border-radius: 0%; background-color: transparent;">
+                          <div class="overlayp">
+                            <span class="harga text-light text-center"><b>Group</b><br>Rp. 470K<br></span>
+                            <button class="booking btn btn-sm btn-outline-success text-light" style="border-radius: 0px; border-color: #fff;"> Booking</button>
+                          </div>
+                        </div>
+                      </center>
+                    </div>
+                  </div>
+                  <p class="textpaket text-light text-center">Dengan beberapa opsi paket di atas Anda akan diberikan fasilitas untuk mengexplore maksimal 3 destinasi wisata di Kulonprogo menggunakan mobil jeep kami yang aman, nyaman dan pelayanan yang excellent. Dengan Kulotrav Anda juga dapat melakukan <i>booking</i> lokasi lebih awal beserta paket breakfast, lunch, bahkan dinner.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-background container-fluid" style="background-image: url(aset/gambar/video.mp4);">
+          <video autoplay muted loop>
+            <source src="aset/gambar/video.mp4" type="video/mp4">
+          </video>
+            <h3 class="titleWU text-light text-center"><b>Wisata unggulan:</b></h3>
+              <div class="row d-flex justify-content-center">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-1">
+                  <center>
+                    <div class="wisataunggulan card" style="max-width: 300px; max-height: 300px;">
+                      <div class="image-container" onClick="toggle('modal1')">
+                        <img src="aset/gambar/7.jpg" class="gambarwisata" style="max-width: 300px; max-height: 300px;">
+                        <div class="overlayg">
+                          <span class="rating text-light text-center">Puncak Saka<br>(Kuliner)<br><i class="bi bi-star-fill"></i> 4.9</span>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-1">
+                  <center>
+                    <div class="wisataunggulan card" style="max-width: 300px; max-height: 300px;">
+                      <div class="image-container" onClick="toggle('modal2')">
+                        <img src="aset/gambar/10.jpg" class="gambarwisata" style="max-width: 300px; max-height: 300px;">
+                        <div class="overlayg">
+                          <span class="rating text-light text-center">Waduk Sermo<br>(Buatan)<br><i class="bi bi-star-fill"></i> 4.7</span>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-1">
+                  <center>
+                    <div class="wisataunggulan card" style="max-width: 300px; max-height: 300px;">
+                      <div class="image-container" onClick="toggle('modal3')">
+                        <img src="aset/gambar/9.jpg" class="gambarwisata" style="max-width: 300px; max-height: 300px;">
+                        <div class="overlayg">
+                          <span class="rating text-light text-center">MJAA<br>(Alam)<br><i class="bi bi-star-fill"></i> 4.8</span>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-1">
+                  <center>
+                    <div class="wisataunggulan card" style="max-width: 300px; max-height: 300px;">
+                      <div class="image-container" onClick="toggle('modal4')">
+                        <img src="aset/gambar/14.jpg" class="gambarwisata" style="max-width: 300px; max-height: 300px;">
+                        <div class="overlayg">
+                          <span class="rating text-light text-center">Pronosutan View<br>(Alam)<br><i class="bi bi-star-fill"></i> 4.9</span>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-1">
+                  <center>
+                    <div class="wisataunggulan card" style="max-width: 300px; max-height: 300px;">
+                      <div class="image-container" onClick="toggle('modal5')">
+                        <img src="aset/gambar/11.jpeg" class="gambarwisata" style="max-width: 300px; max-height: 300px;">
+                        <div class="overlayg">
+                          <span class="rating text-light text-center">Pantai Glagah<br>(Alam)<br><i class="bi bi-star-fill"></i> 4.6</span>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-1">
+                  <center>
+                    <div class="wisataunggulan card" style="max-width: 300px; max-height: 300px;">
+                      <div class="image-container" onClick="toggle('modal6')">
+                        <img src="aset/gambar/12.jpg" class="gambarwisata" style="max-width: 300px; max-height: 300px;">
+                        <div class="overlayg">
+                          <span class="rating text-light text-center">Embung Tonogoro<br>(Buatan)<br><i class="bi bi-star-fill"></i> 4.5</span>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-1">
+                  <center>
+                    <div class="wisataunggulan card" style="max-width: 300px; max-height: 300px;">
+                      <div class="image-container" onClick="toggle('modal7')">
+                        <img src="aset/gambar/13.jpg" class="gambarwisata" style="max-width: 300px; max-height: 300px;">
+                        <div class="overlayg">
+                          <span class="rating text-light text-center">JATP<br>(Buatan)<br><i class="bi bi-star-fill"></i> 4.5</span>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-1">
+                  <center>
+                    <div class="wisataunggulan card" style="max-width: 300px; max-height: 300px;">
+                      <div class="image-container" onClick="toggle('modal8')">
+                        <img src="aset/gambar/8.jpg" class="gambarwisata" style="max-width: 300px; max-height: 300px;">
+                        <div class="overlayg">
+                          <span class="rating text-light text-center">Kopi Ingkar Janji<br>(Kuliner)<br><i class="bi bi-star-fill"></i> 4.9</span>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+              </div>
+        </div>
+
+        <div class="container mb-3">
+          <center><h3 class="text-dark mt-2 mb-4"><b>Didukung oleh:</b></h3></center>
+          <div class="row mt-3 mb-4">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                  <center><img src="aset/gambar/kp_logo.webp" style="max-width: 400px; max-height: 90px;" class="dukungan mb-1"></center>
+                </div>
+            
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <center><img src="aset/gambar/logo_fostifest.webp" style="max-width: 400px; max-height: 90px;" class="dukungan mb-1"></center>
+              </div>
+
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <center><img src="aset/gambar/PI-logo.png" style="max-width: 400px; max-height: 90px;" class="dukungan mb-1"></center>
+              </div>
+          </div> 
+        </div>
+
+        <div class="container-fluid mt-2" style="background-color: #234F1E; border: none;" id="section_kontak">
+          <div class="row mt-2">
+            <div class="footers col-lg-3 col-md-3 col-sm-12 mt-3 text-light">
+              <h6 class="fw-bold text-center">Tentang Kami</h6>
+              <p class="text-center"><a href="" class="text-light">Latar Belakang</a><br>
+                 <a href="" class="text-light">Profil & Sejarah</a><br>
+                 <a href="" class="text-light">Pendiri</a><br>
+                 <a href="" class="text-light">Team Kulotrav</a><br>
+                 <a href="" class="text-light">Legalitas</a><br>
+                 </p>
+            </div>
+            <div class="footers col-lg-3 col-md-3 col-sm-12 mt-3 text-light">
+              <h6 class="fw-bold text-center">Produk & Layanan</h6>
+              <p class="text-center"><a href="" class="text-light">Info Paket</a><br>
+                 <a href="" class="text-light">Promo & Diskon</a><br>
+                 <a href="" class="text-light">Membership & Benefit</a><br>
+                 <a href="" class="text-light">Fasilitas & Destinasi</a><br>
+                 <a href="" class="text-light">Partnership</a><br>
+                 <a href="" class="text-light">Testimoni</a><br>
+                 </p>
+            </div>
+            <div class="footers col-lg-3 col-md-3 col-sm-12 mt-3 text-light">
+              <h6 class="fw-bold text-center">Kontak Kami</h6>
+              <p class="text-center"><a href="" class="text-light"><i class="bi bi-whatsapp"></i> 0812-9023-1840</a><br>
+                 <a href="" class="text-light"><i class="bi bi-instagram"></i> kulotrav_official</a><br>
+                 <a href="" class="text-light"><i class="bi bi-youtube"></i> Kulotrav Official</a><br>
+                 <a href="" class="text-light"><i class="bi bi-facebook"></i> Kulonprogo Traveler</a><br>
+                 <a href="" class="text-light"><i class="bi bi-envelope"></i> kulotrav@gmail.com</a><br>
+                 </p>
+            </div>
+            <div class="footers col-lg-3 col-md-3 col-sm-12 mt-3 text-light">
+              <h6 class="fw-bold text-center">Temukan Kami</h6>
+              <center><img src="aset/gambar/store.png" style="max-width: 350px; max-height: 75px;"></center>
+              <center><small class="text-center"><a href="" class="text-light"><i class="bi bi-geo-alt"></i> Temanggal, Wijimulyo, Nanggulan, Kulonprogo (55671)</a><br>
+              </small></center>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <h6 class="text-light text-center"><a href="" style="text-decoration: none;" class="text-light"><i class="bi bi-c-circle"></i> Copyright Kulotrav 2023</a></h6>
+          </div>
+        </div>
+
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <span class="close text-light" onclick="toggle('modal1')">&times;</span>
+            <h2 class="text-light">Puncak Saka</h2><hr class="text-light">
+            <div class="row">
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <img src="aset/gambar/7.jpg" style="max-width:372px; max-height:372px;" class="gambarmodal shadow">
+              </div>
+              <div class="col-lg-8 col-md-12 col-sm-12">
+                <p style="text-align: justify;" class="teksmodal text-light">Puncak Saka adalah paket lengkap untuk berwisata. Anda dapat bersantai menikmati view persawahan Nanggulan dari atas
+                  Bukit Klajuran sambil menikmati hidangan prasmanan. Selain itu terdapat spot foto instagramable, musola, kolam renang dan paket offroad menggunakan Jeep.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal2" class="modal">
+          <div class="modal-content">
+            <span class="close text-light" onclick="toggle('modal2')">&times;</span>
+            <h2 class="text-light">Waduk Sermo</h2><hr class="text-light">
+            <div class="row">
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <img src="aset/gambar/10.jpg" style="max-width:372px; max-height:372px;" class="gambarmodal shadow">
+              </div>
+              <div class="col-lg-8 col-md-12 col-sm-12">
+                <p style="text-align: justify;" class="teksmodal text-light">Waduk Sermo adalah wisata buatan yang menjadi icon Kabupaten Kulonprogo. Di sini Anda dapat melakukan camping sambil
+                  fishing ataupun berlayar menjelajahi Waduk Sermo. Tidak hanya itu, udara di sini sangat sejuk dan asri dengan wisata Hutan Pinus di dekat Waduk ini.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal3" class="modal">
+          <div class="modal-content">
+            <span class="close text-light" onclick="toggle('modal3')">&times;</span>
+            <h2 class="text-light">MJAA</h2><hr class="text-light">
+            <div class="row">
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <img src="aset/gambar/9.jpg" style="max-width:372px; max-height:372px;" class="gambarmodal shadow">
+              </div>
+              <div class="col-lg-8 col-md-12 col-sm-12">
+                <p style="text-align: justify;" class="teksmodal text-light">MJAA atau akronim dari Mangrove Jembatan Api-Api ini adalah wisata semi buatan yang terletak di Kulonprogo paling ujung selatan
+                  . Cocok bagi Anda yang hendak berlibur bersama keluarga dengan suasana pantai dan wisata atas air beserta kerindangan tanaman mangrove di sekitarnya.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal4" class="modal">
+          <div class="modal-content">
+            <span class="close text-light" onclick="toggle('modal4')">&times;</span>
+            <h2 class="text-light">Pronosutan View</h2><hr class="text-light">
+            <div class="row">
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <img src="aset/gambar/14.jpg" style="max-width:372px; max-height:372px;" class="gambarmodal shadow">
+              </div>
+              <div class="col-lg-8 col-md-12 col-sm-12">
+                <p style="text-align: justify;" class="teksmodal text-light">Pemandangan alam Pronosutan akan membuatmu terngiang-ngiang kembali ke masa kecil dengan gambar yang sering Anda lukis. Dengan pesona 
+                  Pegunungan Menoreh yang menjulang beserta pesawahan yang asri dijamin dapat menghilangkan penat Anda. Anda juga dapat memilih banyak kafe kuliner di sekitaran destinasi ini.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal5" class="modal">
+          <div class="modal-content">
+            <span class="close text-light" onclick="toggle('modal5')">&times;</span>
+            <h2 class="text-light">Pantai Glagah</h2><hr class="text-light">
+            <div class="row">
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <img src="aset/gambar/11.jpeg" style="max-width:372px; max-height:372px;" class="gambarmodal shadow">
+              </div>
+              <div class="col-lg-8 col-md-12 col-sm-12">
+                <p style="text-align: justify;" class="teksmodal text-light">Pantai yang satu ini terletak di Temon, bagi Anda yang hobby berwisata ke pantai Anda wajib mengunjungi Pantai Temon ketika healing ke Kulonprogo.
+                  Selain dekat dengan Bandara YIA, disekitarannya pun ada banyak hotel maupun homestay untuk bermalam. Tentunya dengan adanya pemecah ombak akan membuat Anda aman dari ombak samudra Hindia.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal6" class="modal">
+          <div class="modal-content">
+            <span class="close text-light" onclick="toggle('modal6')">&times;</span>
+            <h2 class="text-light">Embung Tonogoro</h2><hr class="text-light">
+            <div class="row">
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <img src="aset/gambar/12.jpg" style="max-width:372px; max-height:372px;" class="gambarmodal shadow">
+              </div>
+              <div class="col-lg-8 col-md-12 col-sm-12">
+                <p style="text-align: justify;" class="teksmodal text-light">Wisata yang satu ini terletak di Kulonprogo bagian utara, berada di atas perbukitan di Kecamatan Kalibawang. Waduk mini dengan pohon durian disekitarannya
+                  menjadi icon utama Kalibawang. Cocok untuk menikmati sunset maupun sunrise bahkan bertamasya dengan keluarga maupun pasangan Anda. Udara di sini dijamin sangat sejuk.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal7" class="modal">
+          <div class="modal-content">
+            <span class="close text-light" onclick="toggle('modal7')">&times;</span>
+            <h2 class="text-light">JATP</h2><hr class="text-light">
+            <div class="row">
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <img src="aset/gambar/13.jpg" style="max-width:372px; max-height:372px;" class="gambarmodal shadow">
+              </div>
+              <div class="col-lg-8 col-md-12 col-sm-12">
+                <p style="text-align: justify;" class="teksmodal text-light">Wisata dengan tema taman perkebunan atau pertanian ini terletak di Wijimulyo, Nanggulan. JATP sendiri adalah akronim dari Jogja Agro Tekno Park. Anda dapat 
+                  mengunjungi tempat ini bersama dengan kekasih maupun keluarga Anda untuk bertamasya dengan berbagai macam spot foto khas Yogyakarta. Selain itu tempat ini sangat recommended untuk anak-anak.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal8" class="modal">
+          <div class="modal-content">
+            <span class="close text-light" onclick="toggle('modal8')">&times;</span>
+            <h2 class="text-light">KIJ</h2><hr class="text-light">
+            <div class="row">
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <img src="aset/gambar/8.jpg" style="max-width:372px; max-height:372px;" class="gambarmodal shadow">
+              </div>
+              <div class="col-lg-8 col-md-12 col-sm-12">
+                <p style="text-align: justify;" class="teksmodal text-light">Kopi Ingkar Janji mungkin menjadi destinasi kuliner ala kafe khas wong ndeso namun estetik. Bagaimana tidak, Anda akan sangat merasa betah di tempat ini karena 
+                  sambil meminum kopi Anda juga dapat menikmati keindahan kaki Pegunungan Menoreh dengan view sawah asri di depannya. Terdapat juga live music yang cocok untuk anak muda bahkan orang dewasa.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var navLinks = document.querySelectorAll('[data-scroll]');
+
+    navLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
+        e.preventDefault();
+        var targetId = this.getAttribute("data-scroll");
+        var targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: "smooth", 
+          });
+        }
+      });
+    });
+  });
+
+function toggle(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal.style.display === "block") {
+    modal.style.display = "none";
+  } else {
+    modal.style.display = "block";
+  }
+}
+</script>
+</body>
+</html>
